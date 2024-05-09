@@ -3,6 +3,8 @@ import config from './config.json'
 import { listFiles } from './list-files'
 
 const server = createServer(async (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', '*')
+
   try {
     const dir = req.url.replace(/^\//, '')
     const files = await listFiles(dir)
@@ -14,7 +16,7 @@ const server = createServer(async (req, res) => {
     console.error(e)
 
     res.statusCode = 400
-    res.end()
+    res.end(e.message)
   }
 })
 

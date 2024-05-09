@@ -10,11 +10,11 @@ export async function listFiles(dir: string) {
 
   const path = join(config.root, dir)
   if (!existsSync(path)) {
-    throw new Error('File doesn`t exist.')
+    throw new Error(`Path ${path} doesn't exist.`)
   }
 
   if (!(await lstat(path)).isDirectory()) {
-    throw new Error('File is not a directory.')
+    throw new Error(`Path ${path} is not a directory.`)
   }
 
   return (await readdir(path, { withFileTypes: true })).map((x) => ({
